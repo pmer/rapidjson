@@ -2495,8 +2495,14 @@ public:
     typedef GenericObject<false, ValueT> Object;
     typedef ValueT PlainType;
     typedef typename internal::MaybeAddConst<Const,PlainType>::Type ValueType;
-    typedef GenericMemberIterator<Const, typename ValueT::EncodingType, typename ValueT::AllocatorType> MemberIterator;  // This may be const or non-const iterator
-    typedef GenericMemberIterator<true, typename ValueT::EncodingType, typename ValueT::AllocatorType> ConstMemberIterator;
+    typedef typename GenericMemberIterator<Const,
+                                           typename ValueT::EncodingType,
+                                           typename ValueT::AllocatorType>::
+            Iterator MemberIterator;  // This may be const or non-const iterator
+    typedef typename GenericMemberIterator<
+            true,
+            typename ValueT::EncodingType,
+            typename ValueT::AllocatorType>::Iterator ConstMemberIterator;
     typedef typename ValueType::AllocatorType AllocatorType;
     typedef typename ValueType::StringRefType StringRefType;
     typedef typename ValueType::EncodingType EncodingType;
